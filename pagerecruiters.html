@@ -40,8 +40,72 @@
       width:auto;
     }
 
-    nav a { margin-left:20px; color:#fff; text-decoration:none; font-weight:500; }
-    nav a:hover { color:var(--muted); }
+    /* Navigation */
+    .navbar ul {
+      display: flex;
+      list-style: none;
+    }
+
+    .navbar a {
+      margin-left: 20px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .navbar a:hover {
+      color: var(--muted);
+    }
+
+    /* Hamburger button */
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      z-index: 20;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .navbar ul {
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.95);
+        border-radius: 10px;
+        padding: 15px;
+        display: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        animation: slideDown 0.3s ease;
+      }
+
+      .navbar ul.active {
+        display: flex;
+      }
+
+      .navbar a {
+        margin: 10px 0;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     /* Hero */
     .hero {
@@ -183,13 +247,20 @@
     <div class="logo">
       <img src="First Page/bg.png" alt="Logo">
     </div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Education</a>
-      <a href="#">Projects</a>
-      <a href="#">About Me</a>
-      <a href="#">Contact</a>
-      <a href="main.html">Exit</a>
+
+    <!-- Hamburger Menu Button -->
+    <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Education</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">About Me</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="main.html">Exit</a></li>
+      </ul>
     </nav>
   </header>
 
@@ -208,127 +279,42 @@
     </div>
   </section>
 
-  
 <section class="row">
   <h2>Skills</h2>
   <div class="row-cards">
-    
-    <!-- Skills card -->
-
-
+    <!-- Skills cards (same as your original code) -->
     <div class="card">
       <h3>Programming Languages</h3>
-
-      <div class="skill">
-        <div class="skill-head">
-          <span>Python</span><span>92%</span>
-        </div>
-        <div class="bar" style="--value:92%; --accent:#E50914;"></div>
-      </div>
-
-      <div class="skill">
-        <div class="skill-head">
-          <span>Java</span><span>60%</span>
-        </div>
-        <div class="bar" style="--value:60%; --accent:#bdbdbd;"></div>
-      </div>
-
-      <div class="skill">
-        <div class="skill-head">
-          <span>C++</span><span>75%</span>
-        </div>
-        <div class="bar" style="--value:75%; --accent:#E50914;"></div>
-      </div>
-
-      <div class="skill">
-        <div class="skill-head">
-          <span>PHP</span><span>40%</span>
-        </div>
-        <div class="bar" style="--value:40%; --accent:#bdbdbd;"></div>
-      </div>
+      <div class="skill"><div class="skill-head"><span>Python</span><span>92%</span></div><div class="bar" style="--value:92%; --accent:#E50914;"></div></div>
+      <div class="skill"><div class="skill-head"><span>Java</span><span>60%</span></div><div class="bar" style="--value:60%; --accent:#bdbdbd;"></div></div>
+      <div class="skill"><div class="skill-head"><span>C++</span><span>75%</span></div><div class="bar" style="--value:75%; --accent:#E50914;"></div></div>
+      <div class="skill"><div class="skill-head"><span>PHP</span><span>40%</span></div><div class="bar" style="--value:40%; --accent:#bdbdbd;"></div></div>
     </div>
-
-
 
     <div class="card">
       <h3>Database Languages</h3>
-      <div class="skill">
-        <div class="skill-head">
-          <span>SQL</span><span>85%</span>
-        </div>
-        <div class="bar" style="--value:85%; --accent:#E50914;"></div>
-      </div>
-
-      <div class="skill">
-        <div class="skill-head">
-          <span>MongoDB</span><span>60%</span>
-        </div>
-        <div class="bar" style="--value:60%; --accent:#bdbdbd;"></div>
-      </div>
-      </div>
-
-
-      <div class="card">
-      <h3>UI/UX</h3>
-      <div class="skill">
-        <div class="skill-head">
-          <span>Figma</span><span>90%</span>
-        </div>
-        <div class="bar" style="--value:90%; --accent:#E50914;"></div>
-      </div>
-
-      <div class="skill">
-        <div class="skill-head">
-          <span>Adobe XD</span><span>40%</span>
-        </div>
-        <div class="bar" style="--value:40%; --accent:#bdbdbd;"></div>
-      </div>
+      <div class="skill"><div class="skill-head"><span>SQL</span><span>85%</span></div><div class="bar" style="--value:85%; --accent:#E50914;"></div></div>
+      <div class="skill"><div class="skill-head"><span>MongoDB</span><span>60%</span></div><div class="bar" style="--value:60%; --accent:#bdbdbd;"></div></div>
     </div>
 
-      
+    <div class="card">
+      <h3>UI/UX</h3>
+      <div class="skill"><div class="skill-head"><span>Figma</span><span>90%</span></div><div class="bar" style="--value:90%; --accent:#E50914;"></div></div>
+      <div class="skill"><div class="skill-head"><span>Adobe XD</span><span>40%</span></div><div class="bar" style="--value:40%; --accent:#bdbdbd;"></div></div>
+    </div>
+
     <div class="card">
       <h3>Web Development</h3>
-       <div class="skill">
-        <div class="skill-head">
-          <span>HTML</span><span>80%</span>
-        </div>
-        <div class="bar" style="--value:80%; --accent:#E50914;"></div>
-      </div>
-
-      <div class="skill">
-        <div class="skill-head">
-          <span>CSS</span><span>60%</span>
-        </div>
-        <div class="bar" style="--value:60%; --accent:#bdbdbd;"></div>
-      </div>
-
-      <div class="skill">
-        <div class="skill-head">
-          <span>JavaScript</span><span>30%</span>
-        </div>
-        <div class="bar" style="--value:30%; --accent:#E50914;"></div>
-      </div>
+      <div class="skill"><div class="skill-head"><span>HTML</span><span>80%</span></div><div class="bar" style="--value:80%; --accent:#E50914;"></div></div>
+      <div class="skill"><div class="skill-head"><span>CSS</span><span>60%</span></div><div class="bar" style="--value:60%; --accent:#bdbdbd;"></div></div>
+      <div class="skill"><div class="skill-head"><span>JavaScript</span><span>30%</span></div><div class="bar" style="--value:30%; --accent:#E50914;"></div></div>
     </div>
 
-     <div class="card">
+    <div class="card">
       <h3>App Development</h3>
-       <div class="skill">
-        <div class="skill-head">
-          <span>Flutter</span><span>20%</span>
-        </div>
-        <div class="bar" style="--value:20%; --accent:#E50914;"></div>
-      </div>
-
-      <div class="skill">
-        <div class="skill-head">
-          <span>Dart</span><span>20%</span>
-        </div>
-        <div class="bar" style="--value:20%; --accent:#bdbdbd;"></div>
-      </div>
-
+      <div class="skill"><div class="skill-head"><span>Flutter</span><span>20%</span></div><div class="bar" style="--value:20%; --accent:#E50914;"></div></div>
+      <div class="skill"><div class="skill-head"><span>Dart</span><span>20%</span></div><div class="bar" style="--value:20%; --accent:#bdbdbd;"></div></div>
     </div>
-
-
   </div>
 </section>
 
@@ -340,13 +326,13 @@
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
-  function getRandomText() {
-    return texts[Math.floor(Math.random() * texts.length)];
-  }
 
-  document.getElementById("randomText1").textContent = getRandomText();
-  document.getElementById("randomText2").textContent = getRandomText();
-  document.getElementById("randomText3").textContent = getRandomText();
+  // Menu toggle
+  const toggleButton = document.querySelector('.menu-toggle');
+  const navMenu = document.querySelector('.navbar ul');
+  toggleButton.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
 </script>
 
 </body>

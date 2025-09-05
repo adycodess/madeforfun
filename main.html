@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Who's Watching?</title>
   <style>
     body {
@@ -27,10 +27,9 @@
     }
     
     .profiles {
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 2rem;
-      flex-wrap: wrap;
       width: 100%;
       max-width: 1200px;
     }
@@ -44,8 +43,6 @@
       text-align: center;
       cursor: pointer;
       transition: transform 0.3s ease;
-      flex: 1 1 150px; /* Flexible width */
-      max-width: 200px;
     }
 
     .profile:hover {
@@ -55,10 +52,11 @@
     .profile video {
       width: 100%;
       height: auto;
-      aspect-ratio: 1 / 1; /* Maintain square video */
+      aspect-ratio: 1 / 1; /* Always square */
       border-radius: 8px;
       object-fit: cover;
       margin-bottom: 0.8rem;
+      display: block;
     }
 
     .name {
@@ -71,33 +69,26 @@
       color: #fff;
     }
 
-    /* Responsive adjustments for smaller screens */
+    /* Responsive adjustments */
     @media (max-width: 768px) {
       .profiles {
         gap: 1.5rem;
       }
-
-      .profile {
-        max-width: 150px;
+      .name {
+        font-size: 0.9rem;
       }
     }
 
     @media (max-width: 480px) {
       h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         margin-bottom: 2rem;
       }
-
       .profiles {
         gap: 1rem;
       }
-
-      .profile {
-        max-width: 120px;
-      }
-
       .name {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
       }
     }
   </style>
@@ -108,7 +99,7 @@
   <div class="profiles">
     <a href="pagerecruiters.html">
       <div class="profile">
-        <video autoplay loop muted>
+        <video autoplay loop muted playsinline>
           <source src="Who watching/recruiters.mp4" type="video/mp4">
         </video>
         <div class="name">Recruiters</div>
@@ -117,7 +108,7 @@
 
     <a href="pagecrush.html">
       <div class="profile">
-        <video autoplay loop muted>
+        <video autoplay loop muted playsinline>
           <source src="Who watching/my crush.mp4" type="video/mp4">
         </video>
         <div class="name">My Crush</div>
@@ -126,7 +117,7 @@
 
     <a href="pagestalker.html">
       <div class="profile">
-        <video autoplay loop muted>
+        <video autoplay loop muted playsinline>
           <source src="Who watching/stalker.mp4" type="video/mp4">
         </video>
         <div class="name">Stalker</div>
@@ -135,13 +126,12 @@
 
     <a href="pagecritics.html">
       <div class="profile">
-        <video autoplay loop muted>
+        <video autoplay loop muted playsinline>
           <source src="Who watching/critics.mp4" type="video/mp4">
         </video>
         <div class="name">Critics</div>
       </div>
     </a>
   </div>
-
 </body>
 </html>
