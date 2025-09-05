@@ -2,46 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <title>Landing</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#0f0f0f;
+    :root {
+      --bg: #0f0f0f;
     }
 
-    html,body{
-      height:100%;
-      margin:0;
-      font-family:Montserrat, system-ui, sans-serif;
-      background:var(--bg);
-      color:#fff;
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Montserrat, system-ui, sans-serif;
+      background: var(--bg);
+      color: #fff;
+      overflow: hidden;
     }
 
     .landing {
-      position:fixed;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:var(--bg);
-      overflow:hidden;
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
     }
 
-    .landing img{
-      width:50vw;
-      max-width:600px;
-      height:auto;
-      object-fit:cover;
+    .landing img {
+      width: 80vw;               /* responsive width */
+      max-width: 500px;          /* cap for large screens */
+      max-height: 60vh;          /* prevents overflow on tall screens */
+      height: auto;
+      object-fit: contain;
       transition: transform 1.6s cubic-bezier(.2,.9,.2,1), opacity 0.6s ease;
-      will-change:transform,opacity;
-      transform-origin:center center;
+      will-change: transform, opacity;
+      transform-origin: center center;
     }
 
-    .landing.zoom img{
+    .landing.zoom img {
       transform: scale(3.2);
-      opacity:0;
+      opacity: 0;
+    }
+
+    @media (max-width: 480px) {
+      .landing img {
+        width: 70vw;
+        max-height: 50vh;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .landing img {
+        max-width: 600px;
+        max-height: 70vh;
+      }
     }
   </style>
 </head>
@@ -57,15 +72,13 @@
     const delayBeforeStart = 800;
     const zoomDuration = 1600;
 
-    function startIntro(){
-      // Remove and force reflow for repeated refresh
+    function startIntro() {
       landing.classList.remove('zoom');
       void landing.offsetWidth;
 
       setTimeout(() => {
         landing.classList.add('zoom');
 
-        // Redirect after zoom completes
         setTimeout(() => {
           window.location.href = "main.html";
         }, zoomDuration - 100);
