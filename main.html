@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who's Watching?</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #141414;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 500;
+      margin-bottom: 60px;
+    }
+    
+    .profiles {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .profile {
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .profile:hover {
+      transform: scale(1.08);
+    }
+
+    .profile video {
+      width: 180px;
+      height: 180px;
+      border-radius: 4px;
+      object-fit: cover;
+      margin-bottom: 14px;
+    }
+
+    .name {
+      font-size: 1.1rem;
+      color: #aaa;
+    }
+
+    .profile:hover .name {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Who's watching?</h1>
+
+  <div class="profiles">
+    <a href="pagerecruiters.html">
+      <div class="profile">
+        <video autoplay loop muted>
+          <source src="Who watching/recruiters.mp4" type="video/mp4">
+        </video>
+        <div class="name">Recruiters</div>
+      </div>
+    </a>
+
+    <a href="pagecrush.html">
+      <div class="profile">
+        <video autoplay loop muted>
+          <source src="Who watching/my crush.mp4" type="video/mp4">
+        </video>
+        <div class="name">My Crush</div>
+      </div>
+    </a>
+
+    <a href="pagestalker.html">
+      <div class="profile">
+        <video autoplay loop muted>
+          <source src="Who watching/stalker.mp4" type="video/mp4">
+        </video>
+        <div class="name">Stalker</div>
+      </div>
+    </a>
+
+    <a href="pagecritics.html">
+      <div class="profile">
+        <video autoplay loop muted>
+          <source src="Who watching/critics.mp4" type="video/mp4">
+        </video>
+        <div class="name">Critics</div>
+      </div>
+    </a>
+  </div>
+
+</body>
+</html>

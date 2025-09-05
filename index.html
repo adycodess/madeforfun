@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Landing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f0f0f;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:Montserrat, system-ui, sans-serif;
+      background:var(--bg);
+      color:#fff;
+    }
+
+    .landing {
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--bg);
+      overflow:hidden;
+    }
+
+    .landing img{
+      width:50vw;
+      max-width:600px;
+      height:auto;
+      object-fit:cover;
+      transition: transform 1.6s cubic-bezier(.2,.9,.2,1), opacity 0.6s ease;
+      will-change:transform,opacity;
+      transform-origin:center center;
+    }
+
+    .landing.zoom img{
+      transform: scale(3.2);
+      opacity:0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="landing" id="landing">
+    <img src="First Page/bg.png" id="landingLogo" alt="Logo">
+  </div>
+
+  <script>
+    const landing = document.getElementById('landing');
+    const landingLogo = document.getElementById('landingLogo');
+    const delayBeforeStart = 800;
+    const zoomDuration = 1600;
+
+    function startIntro(){
+      // Remove and force reflow for repeated refresh
+      landing.classList.remove('zoom');
+      void landing.offsetWidth;
+
+      setTimeout(() => {
+        landing.classList.add('zoom');
+
+        // Redirect after zoom completes
+        setTimeout(() => {
+          window.location.href = "main.html";
+        }, zoomDuration - 100);
+      }, delayBeforeStart);
+    }
+
+    window.addEventListener('load', startIntro);
+
+    landingLogo.addEventListener('error', () => {
+      landing.style.background = "linear-gradient(180deg,#111,#000)";
+      landingLogo.style.display = "none";
+      setTimeout(() => {
+        window.location.href = "main.html";
+      }, 800);
+    });
+  </script>
+</body>
+</html>
