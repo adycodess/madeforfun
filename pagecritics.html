@@ -27,12 +27,22 @@
       justify-content:space-between;
       padding:20px 50px;
       z-index:10;
-      background: linear-gradient(180deg, rgba(0,0,0,0.9), transparent);
+      background: rgba(0,0,0,0); /* initial transparent */
+      backdrop-filter: blur(0px);
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: none;
+    }
+
+    header.scrolled {
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     }
 
     .logo {
       display:flex;
       align-items:center;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
     .logo img {
@@ -68,7 +78,6 @@
       z-index: 20;
     }
 
-    /* Mobile styles */
     @media (max-width: 768px) {
       .navbar ul {
         flex-direction: column;
@@ -97,14 +106,8 @@
     }
 
     @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Hero */
@@ -157,24 +160,16 @@
       cursor:pointer;
       transition: background 0.2s;
     }
-    .btn.play {
-      background:white; color:black;
-    }
+    .btn.play { background:white; color:black; }
     .btn.play:hover { background: #ddd; }
-    .btn.info {
-      background: rgba(109,109,110,0.7); color:white;
-    }
+    .btn.info { background: rgba(109,109,110,0.7); color:white; }
     .btn.info:hover { background: rgba(109,109,110,0.4); }
 
     /* Rows */
-    .row {
-      position:relative;
-      padding:40px;
-      margin-top:-150px;
-    }
+    .row { position:relative; padding:20px 40px; margin-top: -100px; }
+    .row + .row { margin-top:0px; }
     .row h2 { margin-bottom:20px; font-size:22px; }
 
-    /* Feature cards */
     .row-cards {
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -191,14 +186,9 @@
     }
     .card h3 { margin:0 0 12px 0; font-size:18px; color:var(--accent); }
     .card p { margin:0; color:var(--muted); font-size:14px; line-height:1.5; }
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(229,9,20,0.6);
-    }
+    .card:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(229,9,20,0.6); }
 
-    /* Skills inside cards */
     .skill { margin: 12px 0; }
-
     .skill-head {
       display: flex;
       justify-content: space-between;
@@ -206,7 +196,6 @@
       color: var(--muted);
       margin-bottom: 6px;
     }
-
     .bar {
       --value: 0%;
       --accent: var(--accent);
@@ -227,17 +216,10 @@
       animation: fill 1.2s ease forwards;
     }
 
-    @keyframes fill {
-      to { transform: translateX(0); }
-    }
+    @keyframes fill { to { transform: translateX(0); } }
 
     /* Footer */
-    footer {
-      padding:30px;
-      text-align:center;
-      color:var(--muted);
-      font-size:14px;
-    }
+    footer { padding:30px; text-align:center; color:var(--muted); font-size:14px; }
   </style>
 </head>
 <body>
@@ -247,16 +229,13 @@
     <div class="logo">
       <img src="First Page/bg.png" alt="Logo">
     </div>
-
-    <!-- Hamburger Menu Button -->
     <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
-
-    <!-- Navigation -->
     <nav class="navbar">
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Education</a></li>
+        <li><a href="pagecrush.html">Home</a></li>
+        <li><a href="education.html">Education</a></li>
         <li><a href="#">Projects</a></li>
+        <li><a href="#">Blogs</a></li>
         <li><a href="#">About Me</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="main.html">Exit</a></li>
@@ -264,7 +243,7 @@
     </nav>
   </header>
 
-  <!-- Hero with Video -->
+  <!-- Hero -->
   <section class="hero">
     <video autoplay muted loop>
       <source src="main folio/critics.mp4" type="video/mp4">
@@ -279,44 +258,64 @@
     </div>
   </section>
 
-<section class="row">
-  <h2>Skills</h2>
-  <div class="row-cards">
-    <!-- Skills cards (same as your original code) -->
-    <div class="card">
-      <h3>Programming Languages</h3>
-      <div class="skill"><div class="skill-head"><span>Python</span><span>92%</span></div><div class="bar" style="--value:92%; --accent:#E50914;"></div></div>
-      <div class="skill"><div class="skill-head"><span>Java</span><span>60%</span></div><div class="bar" style="--value:60%; --accent:#bdbdbd;"></div></div>
-      <div class="skill"><div class="skill-head"><span>C++</span><span>75%</span></div><div class="bar" style="--value:75%; --accent:#E50914;"></div></div>
-      <div class="skill"><div class="skill-head"><span>PHP</span><span>40%</span></div><div class="bar" style="--value:40%; --accent:#bdbdbd;"></div></div>
+  <!-- Skills -->
+  <section class="row">
+    <h2>Skills</h2>
+    <div class="row-cards">
+      <div class="card">
+        <h3>Programming Languages</h3>
+        <div class="skill"><div class="skill-head"><span>Python</span><span>92%</span></div><div class="bar" style="--value:92%; --accent:#E50914;"></div></div>
+        <div class="skill"><div class="skill-head"><span>Java</span><span>60%</span></div><div class="bar" style="--value:60%; --accent:#bdbdbd;"></div></div>
+        <div class="skill"><div class="skill-head"><span>C++</span><span>75%</span></div><div class="bar" style="--value:75%; --accent:#E50914;"></div></div>
+        <div class="skill"><div class="skill-head"><span>PHP</span><span>40%</span></div><div class="bar" style="--value:40%; --accent:#bdbdbd;"></div></div>
+      </div>
+      <div class="card">
+        <h3>Database Languages</h3>
+        <div class="skill"><div class="skill-head"><span>SQL</span><span>85%</span></div><div class="bar" style="--value:85%; --accent:#E50914;"></div></div>
+        <div class="skill"><div class="skill-head"><span>MongoDB</span><span>60%</span></div><div class="bar" style="--value:60%; --accent:#bdbdbd;"></div></div>
+      </div>
+      <div class="card">
+        <h3>UI/UX</h3>
+        <div class="skill"><div class="skill-head"><span>Figma</span><span>90%</span></div><div class="bar" style="--value:90%; --accent:#E50914;"></div></div>
+        <div class="skill"><div class="skill-head"><span>Adobe XD</span><span>40%</span></div><div class="bar" style="--value:40%; --accent:#bdbdbd;"></div></div>
+      </div>
+      <div class="card">
+        <h3>Web Development</h3>
+        <div class="skill"><div class="skill-head"><span>HTML</span><span>80%</span></div><div class="bar" style="--value:80%; --accent:#E50914;"></div></div>
+        <div class="skill"><div class="skill-head"><span>CSS</span><span>60%</span></div><div class="bar" style="--value:60%; --accent:#bdbdbd;"></div></div>
+        <div class="skill"><div class="skill-head"><span>JavaScript</span><span>30%</span></div><div class="bar" style="--value:30%; --accent:#E50914;"></div></div>
+      </div>
+      <div class="card">
+        <h3>App Development</h3>
+        <div class="skill"><div class="skill-head"><span>Flutter</span><span>20%</span></div><div class="bar" style="--value:20%; --accent:#E50914;"></div></div>
+        <div class="skill"><div class="skill-head"><span>Dart</span><span>20%</span></div><div class="bar" style="--value:20%; --accent:#bdbdbd;"></div></div>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <h3>Database Languages</h3>
-      <div class="skill"><div class="skill-head"><span>SQL</span><span>85%</span></div><div class="bar" style="--value:85%; --accent:#E50914;"></div></div>
-      <div class="skill"><div class="skill-head"><span>MongoDB</span><span>60%</span></div><div class="bar" style="--value:60%; --accent:#bdbdbd;"></div></div>
+  <!-- Education -->
+  <section class="row">
+    <h2>Education</h2>
+    <div class="row-cards">
+      <div class="card">
+        <h3>Primary School</h3>
+        <div class="skill"><div class="skill-head"><span>St. Michael's School, Durgapur</span><span>100%</span></div><div class="bar" style="--value:100%; --accent:#E50914;"></div></div>
+      </div>
+      <div class="card">
+        <h3>Middle School</h3>
+        <div class="skill"><div class="skill-head"><span>Carmel Convent High School, Durgapur</span><span>100%</span></div><div class="bar" style="--value:100%; --accent:#E50914;"></div></div>
+      </div>
+      <div class="card">
+        <h3>High School</h3>
+        <div class="skill"><div class="skill-head"><span>DAV Model School, Durgapur</span><span>100%</span></div><div class="bar" style="--value:100%; --accent:#E50914;"></div></div>
+      </div>
+      <div class="card">
+        <h3>Undergraduate</h3>
+        <div class="skill"><div class="skill-head"><span>Indian Institute of Technology, Madras</span><span>30%</span></div><div class="bar" style="--value:30%; --accent:#E50914;"></div></div>
+        <div class="skill"><div class="skill-head"><span>Scottish Church College, Kolkata</span><span>40%</span></div><div class="bar" style="--value:40%; --accent:#bdbdbd;"></div></div>
+      </div>
     </div>
-
-    <div class="card">
-      <h3>UI/UX</h3>
-      <div class="skill"><div class="skill-head"><span>Figma</span><span>90%</span></div><div class="bar" style="--value:90%; --accent:#E50914;"></div></div>
-      <div class="skill"><div class="skill-head"><span>Adobe XD</span><span>40%</span></div><div class="bar" style="--value:40%; --accent:#bdbdbd;"></div></div>
-    </div>
-
-    <div class="card">
-      <h3>Web Development</h3>
-      <div class="skill"><div class="skill-head"><span>HTML</span><span>80%</span></div><div class="bar" style="--value:80%; --accent:#E50914;"></div></div>
-      <div class="skill"><div class="skill-head"><span>CSS</span><span>60%</span></div><div class="bar" style="--value:60%; --accent:#bdbdbd;"></div></div>
-      <div class="skill"><div class="skill-head"><span>JavaScript</span><span>30%</span></div><div class="bar" style="--value:30%; --accent:#E50914;"></div></div>
-    </div>
-
-    <div class="card">
-      <h3>App Development</h3>
-      <div class="skill"><div class="skill-head"><span>Flutter</span><span>20%</span></div><div class="bar" style="--value:20%; --accent:#E50914;"></div></div>
-      <div class="skill"><div class="skill-head"><span>Dart</span><span>20%</span></div><div class="bar" style="--value:20%; --accent:#bdbdbd;"></div></div>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- Footer -->
   <footer>
@@ -330,8 +329,31 @@
   // Menu toggle
   const toggleButton = document.querySelector('.menu-toggle');
   const navMenu = document.querySelector('.navbar ul');
-  toggleButton.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
+  toggleButton.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+  // Header blur & logo fade on scroll
+  const logo = document.querySelector('.logo');
+  const header = document.querySelector('header');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+
+    if(currentScroll > lastScroll && currentScroll > 50){
+      logo.style.opacity = "0";
+      logo.style.visibility = "hidden";
+    } else {
+      logo.style.opacity = "1";
+      logo.style.visibility = "visible";
+    }
+
+    if(currentScroll > 20){
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+
+    lastScroll = currentScroll;
   });
 </script>
 
