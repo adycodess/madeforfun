@@ -21,9 +21,19 @@
       color: #fff;
       margin: 0;
       padding: 0;
-      background: url("Education/bg.gif") no-repeat center center fixed;
-      background-size: cover;
       position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Video Background */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
     }
 
     /* Dark overlay */
@@ -45,7 +55,7 @@
       justify-content:space-between;
       padding:20px 50px;
       z-index:10;
-      background: rgba(0,0,0,0); /* initially transparent */
+      background: rgba(0,0,0,0);
       backdrop-filter: blur(0);
       border-bottom: 1px solid rgba(255,255,255,0);
       box-shadow: none;
@@ -59,32 +69,14 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 
-    .logo {
-      display:flex;
-      align-items:center;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
+    .logo { display:flex; align-items:center; transition: opacity 0.3s ease, visibility 0.3s ease; }
     .logo img { height:40px; width:auto; }
 
     .navbar ul { display:flex; list-style:none; }
-    .navbar a {
-      margin-left: 20px;
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-    }
+    .navbar a { margin-left: 20px; color: #fff; text-decoration: none; font-weight: 500; }
     .navbar a:hover { color: var(--muted); }
 
-    .menu-toggle {
-      display: none;
-      font-size: 1.8rem;
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-      z-index: 20;
-    }
+    .menu-toggle { display: none; font-size: 1.8rem; background: none; border: none; color: white; cursor: pointer; z-index: 20; }
 
     @media (max-width: 768px) {
       .navbar ul {
@@ -104,37 +96,14 @@
       .menu-toggle { display:block; }
     }
 
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    /* ---------------- END HEADER ---------------- */
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-    h2 {
-      text-align: center;
-      margin: 120px 0 50px; /* push below header */
-      font-weight: 700;
-      font-size: 2.2rem;
-      background: var(--accent-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    /* ---------------- TITLE ---------------- */
+    h2 { text-align: center; margin: 120px 0 50px; font-weight: 700; font-size: 2.2rem; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .edu-title { font-size: 30px; color: #bdbdbd !important; background: none !important; -webkit-background-clip: initial !important; -webkit-text-fill-color: #bdbdbd !important; }
 
-    .edu-title {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 30px;
-      color: #bdbdbd !important;
-      background: none !important;
-      -webkit-background-clip: initial !important;
-      -webkit-text-fill-color: #bdbdbd !important;
-    }
-
-    .timeline {
-      position: relative;
-      max-width: 850px;
-      margin: auto;
-    }
-
+    /* ---------------- TIMELINE ---------------- */
+    .timeline { position: relative; max-width: 850px; margin: auto; }
     .timeline::after {
       content: '';
       position: absolute;
@@ -147,106 +116,53 @@
       animation: glowline 3s infinite alternate;
       z-index: 0;
     }
+    @keyframes glowline { from { box-shadow: 0 0 5px #e50914; } to { box-shadow: 0 0 20px #ff3c6a; } }
 
-    @keyframes glowline {
-      from { box-shadow: 0 0 5px #e50914; }
-      to { box-shadow: 0 0 20px #ff3c6a; }
-    }
-
-    .entry {
-      position: relative;
-      margin-bottom: 90px;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 1s forwards;
-    }
-
+    .entry { position: relative; margin-bottom: 90px; opacity: 0; transform: translateY(40px); animation: fadeUp 1s forwards; }
     .entry:nth-child(1) { animation-delay: 0.2s; }
     .entry:nth-child(2) { animation-delay: 0.4s; }
     .entry:nth-child(3) { animation-delay: 0.6s; }
     .entry:nth-child(4) { animation-delay: 0.8s; }
     .entry:nth-child(5) { animation-delay: 1s; }
 
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-    .circle-container {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: center;
-      z-index: 2;
-    }
-
+    .circle-container { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; z-index: 2; }
     .circle {
       background: var(--background);
       border: 3px solid transparent;
       background-image: var(--accent-gradient);
       background-origin: border-box;
       background-clip: content-box, border-box;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 16px;
-      color: #fff;
+      width: 55px; height: 55px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold; font-size: 16px; color: #fff;
       box-shadow: 0 0 15px rgba(229,9,20,0.6);
       animation: pulse 2s infinite;
     }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 8px rgba(229,9,20,0.6); }
-      50% { box-shadow: 0 0 20px rgba(255,60,106,0.9); }
-      100% { box-shadow: 0 0 8px rgba(229,9,20,0.6); }
-    }
+    @keyframes pulse { 0% { box-shadow: 0 0 8px rgba(229,9,20,0.6); } 50% { box-shadow: 0 0 20px rgba(255,60,106,0.9); } 100% { box-shadow: 0 0 8px rgba(229,9,20,0.6); } }
 
     .entry-content { display: flex; justify-content: flex-start; width: 100%; }
     .entry:nth-child(even) .entry-content { flex-direction: row-reverse; }
 
-    .card-container {
-      flex: 1;
-      max-width: 400px;
-      margin-left: 480px;
-      position: relative;
-    }
-    .entry:nth-child(even) .card-container {
-      margin-left: 0;
-      margin-right: 480px;
-    }
+    .card-container { flex: 1; max-width: 400px; margin-left: 480px; position: relative; }
+    .entry:nth-child(even) .card-container { margin-left: 0; margin-right: 480px; }
 
     .card-container .date {
-      position: absolute;
-      top: -28px;
-      font-size: 13px;
-      color: var(--date-color);
-      background: #1e1e1e;
-      padding: 3px 8px;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      position: absolute; top: -28px; font-size: 13px; color: var(--date-color);
+      background: #1e1e1e; padding: 3px 8px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
-    .entry:nth-child(even) .card-container .date {
-      right: 0; left: auto;
-    }
+    .entry:nth-child(even) .card-container .date { right: 0; left: auto; }
 
     .card {
       backdrop-filter: blur(12px);
       background: rgba(255,255,255,0.06);
-      border-radius: 14px;
-      padding: 22px;
+      border-radius: 14px; padding: 22px;
       box-shadow: 0 6px 25px rgba(0,0,0,0.6);
       border: 1px solid rgba(255,255,255,0.15);
       transition: transform 0.3s, box-shadow 0.3s;
     }
-    .card:hover {
-      transform: translateY(-8px) scale(1.05);
-      box-shadow: 0 0 35px rgba(229,9,20,0.7);
-    }
-
+    .card:hover { transform: translateY(-8px) scale(1.05); box-shadow: 0 0 35px rgba(229,9,20,0.7); }
     .card h3 { margin: 0 0 10px; font-size: 20px; color: #ff3c6a; }
     .card h4 { margin: 0 0 12px; font-size: 16px; font-weight: 600; color: #fff; }
     .card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
@@ -259,6 +175,11 @@
   </style>
 </head>
 <body>
+
+  <!-- Video Background -->
+  <video autoplay muted loop id="bg-video" playsinline>
+    <source src="Education/bg.mp4" type="video/mp4">
+  </video>
 
   <!-- Header -->
   <header>
@@ -359,9 +280,7 @@
     // Menu toggle
     const toggleButton = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.navbar ul');
-    toggleButton.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-    });
+    toggleButton.addEventListener('click', () => { navMenu.classList.toggle('active'); });
 
     // Scroll-activated header
     const header = document.querySelector('header');
