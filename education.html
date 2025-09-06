@@ -13,6 +13,7 @@
       --background: #121212;
       --muted: rgba(255,255,255,0.7);
       --date-color: #bdbdbd;
+      --glow: 0 0 15px #E50914, 0 0 30px #ff3c6a;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -73,8 +74,23 @@
     .logo img { height:40px; width:auto; }
 
     .navbar ul { display:flex; list-style:none; }
-    .navbar a { margin-left: 20px; color: #fff; text-decoration: none; font-weight: 500; }
-    .navbar a:hover { color: var(--muted); }
+    .navbar a {
+      margin-left: 20px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    .navbar a:hover {
+      color: var(--accent);
+      text-shadow: var(--glow);
+    }
+
+    .navbar a.active {
+      color: var(--accent);
+      text-shadow: var(--glow);
+    }
 
     .menu-toggle { display: none; font-size: 1.8rem; background: none; border: none; color: white; cursor: pointer; z-index: 20; }
 
@@ -192,7 +208,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="education.html">Education</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="#">Blogs</a></li>
+        <li><a href="blog.html">Blogs</a></li>
         <li><a href="about.html">About Me</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="main.html">Exit</a></li>
@@ -294,6 +310,15 @@
         header.classList.remove('scrolled');
         logo.style.opacity = "1";
         logo.style.visibility = "visible";
+      }
+    });
+
+    // Highlight active link based on current page
+    const current = window.location.pathname.split("/").pop();
+    const links = document.querySelectorAll('.navbar a');
+    links.forEach(link => {
+      if (link.getAttribute('href') === current) {
+        link.classList.add('active');
       }
     });
   </script>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent: #E50914;
+      --accent-gradient: linear-gradient(135deg, #e50914, #ff3c6a);
+      --background: #121212;
+      --muted: rgba(255,255,255,0.7);
+      --glow: 0 0 15px #E50914, 0 0 30px #ff3c6a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: #ddd;
+      margin: 0;
+      position: relative;
+      overflow-x: hidden;
+      background: var(--background);
+    }
+
+    /* Video Background */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    /* Dark overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 18, 18, 0.88);
+      z-index: -1;
+    }
+
+    /* ---------------- HEADER ---------------- */
+    header {
+      position: fixed;
+      top:0; left:0;
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:20px 50px;
+      z-index:10;
+      background: rgba(0,0,0,0);
+      backdrop-filter: blur(0);
+      border-bottom: 1px solid rgba(255,255,255,0);
+      box-shadow: none;
+      transition: background 0.3s, backdrop-filter 0.3s, border-bottom 0.3s, box-shadow 0.3s;
+    }
+
+    header.scrolled {
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .logo { display:flex; align-items:center; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    .logo img { height:40px; width:auto; }
+
+    .navbar ul { display:flex; list-style:none; }
+    .navbar a {
+      margin-left: 20px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+    .navbar a:hover {
+      color: var(--accent);
+      text-shadow: var(--glow);
+    }
+    .navbar a.active {
+      color: var(--accent);
+      text-shadow: var(--glow);
+    }
+
+    .menu-toggle { display: none; font-size: 1.8rem; background: none; border: none; color: white; cursor: pointer; z-index: 20; }
+
+    @media (max-width: 768px) {
+      .navbar ul {
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.95);
+        border-radius: 10px;
+        padding: 15px;
+        display: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        animation: slideDown 0.3s ease;
+      }
+      .navbar ul.active { display:flex; }
+      .navbar a { margin: 10px 0; }
+      .menu-toggle { display:block; }
+    }
+
+    @keyframes slideDown { 
+      from { opacity: 0; transform: translateY(-10px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+
+    /* ---------------- TITLE ---------------- */
+    h2.edu-title {
+      text-align: center;
+      margin: 120px 0 50px;
+      font-weight: 700;
+      font-size: 30px;
+      color: #bdbdbd !important;
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      -webkit-text-fill-color: #bdbdbd !important;
+    }
+
+    /* ---------------- PROJECTS WRAPPER ---------------- */
+    .projects-wrapper {
+      min-height: 100vh; 
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 2rem;
+      margin-top: 0;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .card {
+      background: rgba(44, 27, 27, 0.3); 
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    .card img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .card img:hover {
+      transform: scale(1.05) rotate(-2deg);
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .card-content {
+      padding: 1rem;
+      flex: 1;
+    }
+
+    .card-content h3 {
+      margin: 0 0 0.5rem;
+      color: #fff;
+    }
+
+    .card-content small {
+      display: block;
+      margin-bottom: 1rem;
+      color: var(--muted);
+    }
+
+    .card-content p {
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .card-actions {
+      padding: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .card-actions a {
+      flex: 1;
+      text-align: center;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      background: rgba(18, 18, 18, 0.8);
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-actions a:hover {
+      background: rgba(18, 18, 18, 1);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .projects-wrapper { padding: 100px 1rem 2rem; }
+      .projects { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video Background -->
+  <video autoplay muted loop id="bg-video" playsinline>
+    <source src="Projects/bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="First Page/bg.png" alt="Logo">
+    </div>
+    <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="blog.html">Blogs</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="main.html">Exit</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Projects Heading -->
+  <h2 class="edu-title">Projects</h2>
+
+  <!-- Projects Section -->
+  <div class="projects-wrapper">
+    <div class="projects">
+      <!-- Project cards remain the same as your original code -->
+      <!-- Project 4 -->
+      <div class="card">
+        <a href="https://adycodess.github.io/Portfolio/">
+          <img src="Projects/Pro4.png" alt="Project 4">
+        </a>
+        <div class="card-content">
+          <h3>Personal Portfolio</h3>
+          <small>Web Development • 2025</small>
+          <p>Designed and developed an official personal portfolio website using HTML and CSS to professionally present projects, skills, and contact information.</p>
+        </div>
+        <div class="card-actions">
+          <a href="https://adycodess.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">View Portfolio</a>
+          <a href="https://github.com/adycodess/Portfolio" target="_blank" rel="noopener noreferrer">Open Source Code</a>
+          <a href="https://www.figma.com/design/fNMdPxjszwZTfuQ80kUols/Untitled?node-id=0-1&t=PKfRhPadJFz7vFvY-1" target="_blank" rel="noopener noreferrer">View Website Layout</a>
+        </div>
+      </div>
+
+      <!-- Project 1 -->
+      <div class="card">
+        <a href="https://sites.google.com/view/mini-learns/home" target="_blank" rel="noopener noreferrer">
+          <img src="Projects/Pro1.png" alt="Project 1">
+        </a>
+        <div class="card-content">
+          <h3>Statistical Portfolio</h3>
+          <small>Statistics • 2024</small>
+          <p>Developed a comprehensive statistics portfolio website showcasing structured academic engagement with statistical concepts, weekly coursework, and real-world data analysis using datasets from Kaggle, as part of a curriculum requirement for IIT.</p>
+        </div>
+        <div class="card-actions">
+          <a href="https://sites.google.com/view/mini-learns/home" target="_blank" rel="noopener noreferrer">View Project</a>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="card">
+        <a href="https://adycodess.github.io/madeforfun/">
+          <img src="Projects/Pro5.png" alt="Project 5">
+        </a>
+        <div class="card-content">
+          <h3>Creative Portfolio</h3>
+          <small>Portfolio • 2025</small>
+          <p>Created a personal portfolio website for fun, showcasing my design and development skills. Focused on experimenting with layouts, visuals, and interactive elements to reflect creativity and style.</p>
+        </div>
+        <div class="card-actions">
+          <a href="https://adycodess.github.io/madeforfun/" target="_blank" rel="noopener noreferrer">View Portfolio</a>
+          <a href="https://github.com/adycodess/madeforfun" target="_blank" rel="noopener noreferrer">Open Source Code</a>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="card">
+        <a href="https://drive.google.com/file/d/1FSPOd6TNbAjOQfSCt_gT_5jVjy4BUrHf/view?usp=sharing">
+          <img src="Projects/Pro3.jpg" alt="Project 3">
+        </a>
+        <div class="card-content">
+          <h3>Splash Screen</h3>
+          <small>UI/UX • 2025</small>
+          <p>Designed a calming and visually engaging splash screen for a meditation app during my internship. Focused on creating a soothing first impression that aligns with the app’s mindfulness and relaxation theme.</p>
+        </div>
+        <div class="card-actions">
+          <a href="https://drive.google.com/file/d/1FSPOd6TNbAjOQfSCt_gT_5jVjy4BUrHf/view?usp=sharing" target="_blank" rel="noopener noreferrer">View Project</a>
+          <a href="https://www.figma.com/proto/JEBCLlxt48mHbMpUzCrhov/Figma-basics?page-id=1669%3A162202&node-id=654-157&p=f&viewport=759%2C506%2C0.25&t=D7COvD093XwWyfAf-1&scaling=contain&content-scaling=fixed&starting-point-node-id=633%3A57" target="_blank" rel="noopener noreferrer">Open Prototype</a>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="card">
+        <a href="https://adycodess.github.io/Password-Server/" target="_blank" rel="noopener noreferrer">
+          <img src="Projects/Pro2.jpg" alt="Project 2">
+        </a>
+        <div class="card-content">
+          <h3>Password Server</h3>
+          <small>Python Programming • 2024</small>
+          <p>Developed a password-protected server project implementing secure access control and encryption techniques. Ensured data confidentiality and authorized access to enhance overall system security.</p>
+        </div>
+        <div class="card-actions">
+          <a href="https://adycodess.github.io/Password-Server/" target="_blank" rel="noopener noreferrer">View Project</a>
+          <a href="https://github.com/adycodess/Password-Server" target="_blank" rel="noopener noreferrer">Open Source Code</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Menu toggle
+    const toggleButton = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.navbar ul');
+    toggleButton.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+
+    // Scroll-activated header
+    const header = document.querySelector('header');
+    const logo = document.querySelector('.logo');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+        logo.style.opacity = "0";
+        logo.style.visibility = "hidden";
+      } else {
+        header.classList.remove('scrolled');
+        logo.style.opacity = "1";
+        logo.style.visibility = "visible";
+      }
+    });
+
+    // Highlight active link based on current page
+    const current = window.location.pathname.split("/").pop();
+    const links = document.querySelectorAll('.navbar a');
+    links.forEach(link => {
+      if (link.getAttribute('href') === current) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+
+</body>
+</html>

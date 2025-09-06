@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blogs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --accent: #E50914;
+      --accent-gradient: linear-gradient(135deg, #e50914, #ff3c6a);
+      --background: #121212;
+      --muted: rgba(255,255,255,0.7);
+      --glow: 0 0 15px #E50914, 0 0 30px #ff3c6a;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Video Background */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    /* Dark overlay */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 18, 18, 0.88);
+      z-index: -1;
+    }
+
+    /* ---------------- HEADER ---------------- */
+    header {
+      position: fixed;
+      top:0; left:0;
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:20px 50px;
+      z-index:10;
+      background: rgba(0,0,0,0);
+      backdrop-filter: blur(0);
+      border-bottom: 1px solid rgba(255,255,255,0);
+      box-shadow: none;
+      transition: background 0.3s, backdrop-filter 0.3s, border-bottom 0.3s, box-shadow 0.3s;
+    }
+
+    header.scrolled {
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .logo { display:flex; align-items:center; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    .logo img { height:40px; width:auto; }
+
+    .navbar ul { display:flex; list-style:none; }
+    .navbar a {
+      margin-left: 20px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+    .navbar a:hover {
+      color: var(--accent);
+      text-shadow: var(--glow);
+    }
+    .navbar a.active {
+      color: var(--accent);
+      text-shadow: var(--glow);
+    }
+
+    .menu-toggle { display: none; font-size: 1.8rem; background: none; border: none; color: white; cursor: pointer; z-index: 20; }
+
+    @media (max-width: 768px) {
+      .navbar ul {
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.95);
+        border-radius: 10px;
+        padding: 15px;
+        display: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        animation: slideDown 0.3s ease;
+      }
+      .navbar ul.active { display:flex; }
+      .navbar a { margin: 10px 0; }
+      .menu-toggle { display:block; }
+    }
+
+    @keyframes slideDown { 
+      from { opacity: 0; transform: translateY(-10px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+
+    /* ---------------- BLOGS HEADING ---------------- */
+    h2.blog-title {
+      text-align: center;
+      margin: 120px 0 50px;
+      font-weight: 700;
+      font-size: 30px;
+      color: #bdbdbd;
+      background: none;
+      -webkit-background-clip: initial;
+      -webkit-text-fill-color: #bdbdbd;
+    }
+
+    /* ---------------- BLOG LAYOUT ---------------- */
+    .blog-container {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+
+    .blog {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .blog:nth-child(even) { flex-direction: row-reverse; }
+
+    .blog img {
+      width: 260px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
+      transition: transform 0.5s ease;
+      cursor: pointer;
+      position: absolute;
+      top: -25px;
+      z-index: 1;
+    }
+
+    .blog:nth-child(odd) img { left: 0; }
+    .blog:nth-child(even) img { right: 0; }
+
+    .blog img:hover {
+      animation: zoomTeeter 1s ease forwards;
+      box-shadow: 0 0 35px rgba(229, 9, 20, 0.7);
+    }
+
+    @keyframes zoomTeeter {
+      0% { transform: translateX(0) scale(1); }
+      30% { transform: translateX(0) scale(1.05); }
+      50% { transform: translateX(0) scale(1.05) rotate(-5deg); }
+      70% { transform: translateX(0) scale(1.05) rotate(5deg); }
+      100% { transform: translateX(0) scale(1.05) rotate(0deg); }
+    }
+
+    .blog-card {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 30px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
+      transition: box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .blog:nth-child(odd) .blog-card { margin-left: 240px; }
+    .blog:nth-child(even) .blog-card { margin-right: 240px; }
+
+    .blog-card:hover { box-shadow: 0 0 35px rgba(229, 9, 20, 0.7); }
+
+    .blog-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.6rem;
+      color: #ff3c6a;
+    }
+
+    .blog-card p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .blog {
+        flex-direction: column !important;
+        align-items: center;
+        text-align: center;
+      }
+
+      .blog img {
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        transform: none;
+        width: 200px;
+        height: 200px;
+        margin-bottom: -60px;
+      }
+
+      .blog-card {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding: 30px;
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Video Background -->
+  <video autoplay muted loop id="bg-video" playsinline>
+    <source src="Blogs/bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="First Page/bg.png" alt="Logo">
+    </div>
+    <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="blog.html">Blogs</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="main.html">Exit</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Blogs Heading -->
+  <h2 class="blog-title">Blogs</h2>
+
+  <div class="blog-container">
+
+    <div class="blog">
+      <img src="Blogs/blog1.jpg" alt="Blog 1"/>
+      <div class="blog-card" onclick="window.location.href='blog1.html'">
+        <h3>The King of Rock ‘n’ Roll</h3>
+        <p>Few names in music history shine as brightly as Elvis Presley. Known as the "King of Rock ‘n’ Roll," Elvis revolutionized popular music and culture, leaving behind a legacy that continues to inspire generations. From his humble beginnings in Tupelo, Mississippi, to becoming one of the most iconic figures in entertainment.</p>
+      </div>
+    </div>
+
+    <div class="blog">
+      <img src="Blogs/blog2.jpg" alt="Blog 2"/>
+      <div class="blog-card" onclick="window.location.href='blog2.html'">
+        <h3>Quantum Computing: The Next Big Leap in Technology</h3>
+        <p>For decades, computers have been getting smaller, faster, and more powerful — a trend famously captured by Moore’s Law. This exponential growth has driven the digital revolution, giving us everything from smartphones to AI assistants. But we’re starting to hit physical and technological limits.</p>
+      </div>
+    </div>
+
+    <div class="blog">
+      <img src="Blogs/blog3.jpg" alt="Blog 3"/>
+      <div class="blog-card" onclick="window.location.href='blog3.html'">
+        <h3>The Evolution of Gaming</h3>
+        <p>Gaming has evolved dramatically, transforming from simple 8-bit consoles with pixelated characters into a multi-billion-dollar global industry that now surpasses movies and music combined. It has become a space where technology, creativity, and community intersect, shaping how people play, connect, and even earn a living.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Menu toggle
+    const toggleButton = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.navbar ul');
+    toggleButton.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+
+    // Scroll-activated header
+    const header = document.querySelector('header');
+    const logo = document.querySelector('.logo');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+        logo.style.opacity = "0";
+        logo.style.visibility = "hidden";
+      } else {
+        header.classList.remove('scrolled');
+        logo.style.opacity = "1";
+        logo.style.visibility = "visible";
+      }
+    });
+
+    // Dynamic active link
+    const current = window.location.pathname.split("/").pop();
+    const links = document.querySelectorAll('.navbar a');
+    links.forEach(link => {
+      if (link.getAttribute('href') === current) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+
+</body>
+</html>
